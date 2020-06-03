@@ -30,9 +30,9 @@ Click the “Accept Invitation” button and create a password. This username/pa
 
 Once Control Tower has finished setting up the landing zone, its time to provision the Transit Account. The transit account will eventually house the Client VPN Endpoint and Transit Gateway portion of the solution. All future inter-account or inter-vpc networking can and should be configured through the Transit Gateway created by this account. Ideally, only your network administrator will have access to log into the Transit Account’s AWS Console.   
 
-Navigate to Control Tower in the AWS Console and click on the “Account Factory“ link on the left side, then the ”Quick account provisioning“ button.  
+Navigate to Control Tower in the AWS Console and click on the “Account Factory“ link on the left side, then the "Enroll Account" button.  
 
-![](https://devspacepaul.s3-us-west-2.amazonaws.com/bbma/docs/images/DYcV47OBODvUwOPG2aCIIw.png)
+![](http://devspacepaul.s3.us-west-2.amazonaws.com/bbma/docs/images/enrollacct.png)
 
 Use the following fields in the ‘Account details’ form and click create account.  
 
