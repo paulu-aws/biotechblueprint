@@ -136,7 +136,7 @@ Navigate to the AWS Cloud9 console, and click the “Create environment” butto
 Follow the creation wizard, but you only need to specify the following parameters. Leave the rest as their defaults.   
 
 Environment Name (Call it something like Biotech Blueprint Deployment Console)  
-Instance Type: t2.small  
+Instance Type: t3.small  
 
 It will take a few minutes, but you will eventually be presented with the following development environment:  
 
@@ -210,7 +210,7 @@ region=us-east-1
 aws_access_key_id = ASIA3Q...X4LIPYBL  
 aws_secret_access_key = D+xfSxawa......gnXCiEYAh  
 aws_session_token = AgoJb3Jpujc............NU7ZQETpGyO2u  
-region=us-east-1</pre>
+region=us-east-1
 ```
 
 Make sure you add region=us-east-1, or whatever your desired home region is to each profile.   
