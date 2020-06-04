@@ -246,6 +246,8 @@ export class IdentityCore extends core.Construct {
         ]
     });
     
+    joinDomainAssociation.addDependsOn(activeDirectory);
+    
     joinDomainAssociation.addPropertyOverride('Parameters',{
         directoryId: [activeDirectory.ref],
         directoryName: [props.corporateDnsApex],

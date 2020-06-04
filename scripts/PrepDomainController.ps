@@ -24,6 +24,8 @@ $adAdminAccountUsername = $adAdminSecretDict.username
 $adAdminPassword = ConvertTo-SecureString $adAdminSecretDict.password -AsPlainText -Force
 $adAdminCred = New-Object System.Management.Automation.PSCredential -ArgumentList $adAdminAccountUsername,$adAdminPassword
 
+Add-LocalGroupMember -Group Administrators -Member $domain\\$adAdminAccountUsername
+
 [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
 Invoke-Command -Computer . -Credential $adAdminCred -ScriptBlock {  
