@@ -67,15 +67,11 @@ export class transitAccountStack extends core.Stack {
 const transitAccount = new transitAccountStack(app,'TransitAccountStack', {env: envTransit});
 
 
-
-
-
-
-
 export interface childAccountStackProps extends core.StackProps {
   desiredVpcCidr?: string;
   desiredVpcName?: string;
   existingVpcId?: string; 
+  secretIndex?: string;
 }
 
 export class childAccountStack extends core.Stack {
@@ -104,7 +100,8 @@ export class childAccountStack extends core.Stack {
       const accountCore = new BBChildAccountCore(this, 'BBChildAccountCore', {
           orgId: orgId,
           integrationSecretsArn: app.node.tryGetContext("transitGatewaySecretArn"),
-          existingVpcId: props.existingVpcId
+          existingVpcId: props.existingVpcId,
+          secretIndex: props.secretIndex
       });
       this.Vpc = accountCore.Vpc;
       this.VpcCidrRange = accountCore.Vpc.vpcCidrBlock;  
@@ -179,6 +176,7 @@ export interface VpcRouteTableTransitRouteStackProps extends core.StackProps {
   destinationCidr: string;
   targetVpc: ec2.IVpc;
 }
+
 export class VpcRouteTableTransitRouteStack extends core.Stack {
   
   constructor(scope: core.App, id: string, props: VpcRouteTableTransitRouteStackProps) {
@@ -236,7 +234,6 @@ export class AdConnectorStack extends core.Stack {
 }
 const TransitAdConnectorStack = new AdConnectorStack(app,'TransitAdConnectorStack', {env: envTransit, targetVpc: transitAccount.vpc});
 const ResearchAdConnectorStack = new AdConnectorStack(app,'ResearchAdConnectorStack', {env: envResearch, targetVpc: researchAccount.Vpc});
-
 
 
 export class TransitVpnStack extends core.Stack {
@@ -302,7 +299,6 @@ export class TransitEnrolledAccount extends core.Stack {
     
   }
 }
-
 
 
 /////////////////////////////////////////

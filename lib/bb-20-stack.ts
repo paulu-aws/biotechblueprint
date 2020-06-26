@@ -13,6 +13,7 @@ export interface BbCoreProps extends core.StackProps {
   desiredVpcCidr?: string; 
   desiredVpcName?: string;
   existingVpcId?: string;
+  secretIndex?: string;
 }
 
 export class BBChildAccountCore extends core.Construct {
@@ -118,10 +119,16 @@ export class BBChildAccountCore extends core.Construct {
     });
     
 
+    var transitSecretName = "ga";
+    var vpcCidrSecretName = "vc";
     
+    if(props.secretIndex){
+        transitSecretName = `g${props.secretIndex}`;
+        vpcCidrSecretName = `v${props.secretIndex}`;
+    }
     
     const transitSecret = new sm.Secret(this , "transitGatewayAttachmentSecret", { 
-        secretName: "ga",
+        secretName: transitSecretName,
         generateSecretString : {
             secretStringTemplate: JSON.stringify( { 
                     GatewayAttachment: transitGatewayAttachment.ref,
@@ -134,7 +141,7 @@ export class BBChildAccountCore extends core.Construct {
     
     
     const vpcCidrSecret = new sm.Secret(this , "transitGatewayVpcCidrSecret", { 
-        secretName: "vc",
+        secretName: vpcCidrSecretName,
         generateSecretString : {
             secretStringTemplate: JSON.stringify( { 
                     VpcCidr: this.Vpc.vpcCidrBlock
